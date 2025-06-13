@@ -5,7 +5,7 @@ from cog import BasePredictor, Input
 from typing import List
 from transformers import AutoModel, AutoTokenizer
 
-MODEL_ID = "Snowflake/snowflake-arctic-embed-l"
+MODEL_ID = "Snowflake/snowflake-arctic-embed-m-v2.0"
 MODEL_CACHE = "checkpoint"
 
 class Predictor(BasePredictor):
@@ -16,11 +16,9 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
-        prompt: str = Input(description="Prompt to generate a vector embedding for", default='Snowflake is the Data Cloud!'),
+        documents: List[str] = Input(description="Document to create the embeddings for", default=['Snowflake is the Data Cloud!']),
     ) -> List[float]:
-        """Run a single prediction on the model"""
-        documents = [prompt]
         encoded_input = self.tokenizer(documents, padding=True, return_tensors='pt')
         outputs = self.model(**encoded_input).last_hidden_state
-        embeddings = outputs[:, 0].tolist()[0]
+        embeddings = outputs[:, 0].tolist()
         return embeddings

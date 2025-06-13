@@ -1,6 +1,6 @@
-# Snowflake/snowflake-arctic-embed-l Cog Model
+# Snowflake/snowflake-arctic-embed-m Cog Model
 
-This is an implementation of [Snowflake/snowflake-arctic-embed-l](https://huggingface.co/Snowflake/snowflake-arctic-embed-l) as a [Cog](https://github.com/replicate/cog) model.
+This is an implementation of [Snowflake/snowflake-arctic-embed-m-2](https://huggingface.co/Snowflake/snowflake-arctic-embed-m-v2.0) as a [Cog](https://github.com/replicate/cog) model.
 
 ## Basic Usage
 

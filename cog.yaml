@@ -2,11 +2,12 @@
 # Reference: https://github.com/replicate/cog/blob/main/docs/yaml.md
 
 build:
-  gpu: false
+  gpu: true
   python_version: "3.11"
   python_packages:
-    - "torch==2.1.0"
-    - "transformers==4.40.0"
+    - "torch==2.7.0+cu124"
+    - "xformers==0.0.30"
+    - "sentence-transformers==4.1.0"
 
 # predict.py defines how predictions are run on your model
 predict: "predict.py:Predictor"

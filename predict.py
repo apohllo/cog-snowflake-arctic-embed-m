@@ -1,12 +1,15 @@
 # Prediction interface for Cog ⚙️
 # https://github.com/replicate/cog/blob/main/docs/python.md
 
-from cog import BasePredictor, Input
+from cog import BasePredictor, Input, BaseModel
 from typing import List
 from sentence_transformers import SentenceTransformer
 
 MODEL_ID = "Snowflake/snowflake-arctic-embed-m-v2.0"
 MODEL_CACHE = "checkpoint"
+
+class Output(BaseModel):
+    embedding: List[float]
 
 class Predictor(BasePredictor):
     def setup(self) -> None:
@@ -15,11 +18,11 @@ class Predictor(BasePredictor):
 
     def predict(
         self,
-        documents: List[str] = Input(description="Document to create the embeddings for", default=['Snowflake is the Data Cloud!']),
-        query: bool = Input(description="Whether to add query prefix"", default=False),
-    ) -> List[float]:
+        document: str = Input(description="Documents to create the embeddings for", default='Snowflake is the Data Cloud!'),
+        query: bool = Input(description="Whether to add query prefix", default=False),
+    ) -> Output:
         if(query):
-            embeddings = self.model.encode(documents, prompt_name="query")
+            embedding = self.model.encode(document, prompt_name="query")
         else:
-            embeddings = self.model.encode(documents)
-        return embeddings
+            embedding = self.model.encode(document)
+        return Output(embedding=embedding)
